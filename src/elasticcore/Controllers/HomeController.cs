@@ -101,6 +101,18 @@ namespace elasticcore.Controllers
             client.IndexMany(people); return View();
         }
 
+        [Route("IndexBoats")]
+        public IActionResult IndexBoats()
+        {
+            using(var db = new BoatContext())
+            {
+                var boats = db.Boats.Where(x => !x.Deleted && x.Visible).ToList();
+                client.IndexMany(boats);
+            }
+
+            return View();
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
