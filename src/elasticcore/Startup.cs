@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using elasticcore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace elasticcore
 {
@@ -29,6 +31,7 @@ namespace elasticcore
         {
             // Add framework services.
             services.AddMvc();
+            services.AddDbContext<BoatContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BoatContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

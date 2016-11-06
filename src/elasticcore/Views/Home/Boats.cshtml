@@ -1,0 +1,13 @@
+﻿@model IEnumerable<elasticcore.Models.Boats>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<ul>
+    @foreach (var boat in Model)
+    {
+        <li>@boat.MakeModel</li>
+    }
+</ul>

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Nest;
+using System;
 using System.Collections.Generic;
 
 namespace elasticcore.Models
 {
+    [ElasticsearchType(IdProperty = "Id", Name = "boats")]
     public partial class Boats
     {
         public Boats()
