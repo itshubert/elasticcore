@@ -17,6 +17,7 @@ namespace elasticcore.Controllers
             // default elastic search client port
             var node = new Uri("http://localhost:9200");
             var settings = new ConnectionSettings(node);
+            settings.MapDefaultTypeNames(m => m.Add(typeof(Boats), "GbrBoats"));
             settings.DefaultIndex("dumasnet");
             client = new ElasticClient(settings);
 
@@ -113,6 +114,41 @@ namespace elasticcore.Controllers
             return View();
         }
 
+        [HttpGet("boats")]
+        public IActionResult Boats()
+        {
+            var results = client.Search<Boats>(s => s
+            .Query(q => 
+                q.MultiMatch(
+                    c => c.Fields(f => 
+                        f.Field(p => p.MakeModel)
+                        .Field(p => p.Description)
+                    )
+                    .Query("Scimitar")
+                )
+            ).Explain());
+
+            return View(results);
+        }
+
+        [HttpPost("boats")]
+        public IActionResult SearchBoats(SRequest request)
+        {
+            var results = client.Search<Boats>(s => s
+           .Query(q =>
+               q.MultiMatch(
+                   c => c.Fields(f =>
+                       f.Field(p => p.MakeModel)
+                       .Field(p => p.Description)
+                   )
+                   .Query(request.Keywords)
+               )
+           ).Explain());
+
+            return View("Boats", results);
+        }
+
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -131,5 +167,10 @@ namespace elasticcore.Controllers
         {
             return View();
         }
+    }
+
+    public class SRequest
+    {
+        public string Keywords { get; set; }
     }
 }

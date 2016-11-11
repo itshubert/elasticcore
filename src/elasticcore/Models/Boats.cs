@@ -20,12 +20,15 @@ namespace elasticcore.Models
         public int Id { get; set; }
         public string Ref { get; set; }
         public string MakeModel { get; set; }
+        [Object(Store = false)]
         public int? CurrencyId { get; set; }
         public decimal? Price { get; set; }
         public int? Year { get; set; }
         public string Description { get; set; }
         public string VesselName { get; set; }
+        [Object(Store = false)]
         public string Length { get; set; }
+        [Object(Store = false)]
         public int UnitId { get; set; }
         public string Designer { get; set; }
         public string Builder { get; set; }
@@ -58,33 +61,58 @@ namespace elasticcore.Models
         public string EngineRoom { get; set; }
         public string Survey { get; set; }
         public string Remarks { get; set; }
+        [Object(Store = false)]
         public int RegionId { get; set; }
+        [Object(Store = false)]
         public bool Visible { get; set; }
+        [Object(Store = false)]
         public DateTime CreatedDate { get; set; }
+        [Object(Store = false)]
         public DateTime UpdatedDate { get; set; }
         public string Location { get; set; }
+        [Object(Store = false)]
         public int StatusId { get; set; }
+        [Object(Store = false)]
         public int? PriceCommentId { get; set; }
+        [Object(Store = false)]
         public bool Deleted { get; set; }
+        [Object(Store = false)]
         public bool Tweeted { get; set; }
+        [Object(Store = false)]
         public bool Facebook { get; set; }
+        [Object(Store = false)]
         public int? Bdid { get; set; }
         public string BdstockNumber { get; set; }
+        [Object(Store = false)]
         public string CreatedBy { get; set; }
+        [Object(Store = false)]
         public string UpdatedBy { get; set; }
 
+        [Object(Ignore = true)]
         public virtual ICollection<BoatCategories> BoatCategories { get; set; }
+        [Object(Ignore = true)]
         public virtual ICollection<BoatImages> BoatImages { get; set; }
+        [Object(Ignore = true)]
         public virtual ICollection<BoatViews> BoatViews { get; set; }
+        [Object(Ignore = true)]
         public virtual ICollection<Enquiries> Enquiries { get; set; }
+        [Object(Ignore = true)]
         public virtual ICollection<Pdfs> Pdfs { get; set; }
+        [Object(Ignore = true)]
         public virtual ICollection<Videos> Videos { get; set; }
+        [Object(Ignore = true)]
         public virtual AspNetUsers CreatedByNavigation { get; set; }
+        [Object(Ignore = true)]
         public virtual Currencies Currency { get; set; }
+        [Object(Ignore = true)]
         public virtual PriceComments PriceComment { get; set; }
+        [Object(Ignore = true)]
         public virtual Regions Region { get; set; }
+        [Object(Ignore = true)]
         public virtual Statuses Status { get; set; }
+        [Object(Ignore = true)]
         public virtual Units Unit { get; set; }
+        [Object(Ignore = true)]
         public virtual AspNetUsers UpdatedByNavigation { get; set; }
     }
 }

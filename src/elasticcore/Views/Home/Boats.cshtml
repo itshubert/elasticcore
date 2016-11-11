@@ -1,13 +1,21 @@
-﻿@model IEnumerable<elasticcore.Models.Boats>
+﻿@model Nest.ISearchResponse<elasticcore.Models.Boats>
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 
+<form action="/Boats" method="post">
+    <div class="form-group">
+        <label>Search</label>
+        <input type="text" class="form-control" id="Keywords" name="Keywords" />
+    </div>
+    <button class="btn btn-sm btn-primary" type="submit">Search</button>
+</form>
+
 <ul>
-    @foreach (var boat in Model)
+    @foreach (var hit in Model.Hits)
     {
-        <li>@boat.MakeModel</li>
+        <li>@hit.Source.Id - @hit.Source.MakeModel - @hit.Score</li>
     }
 </ul>
